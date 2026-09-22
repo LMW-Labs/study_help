@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel
+
+# Case study source PDFs (large files — process locally with scripts/extractCaseStudies.mjs)
+/casestudy/*.pdf
+
+# Temp images generated during PDF extraction
+/.casestudy-tmp/

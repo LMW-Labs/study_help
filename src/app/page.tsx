@@ -115,6 +115,17 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Case Studies CTA */}
+      <div className="bg-gradient-to-r from-indigo-950/60 to-slate-900 border border-indigo-800/40 rounded-xl p-6 mb-4 flex items-center justify-between gap-4">
+        <div>
+          <h3 className="text-white font-semibold mb-1">📚 Case Studies</h3>
+          <p className="text-slate-400 text-sm">Real scenarios with discussion questions — understand the <em>why</em> and <em>how</em>, not just the rules.</p>
+        </div>
+        <Link href="/cases" className="shrink-0 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-medium text-sm transition-colors whitespace-nowrap">
+          Open Cases →
+        </Link>
+      </div>
+
       {/* Search CTA */}
       <div className="bg-gradient-to-r from-blue-950/60 to-slate-900 border border-blue-800/40 rounded-xl p-6 mb-6 flex items-center justify-between gap-4">
         <div>

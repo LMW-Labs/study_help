@@ -33,6 +33,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/answer-key/1" className="px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition-colors">
                 Keys
               </Link>
+              <Link href="/cases" className="px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition-colors">
+                Cases
+              </Link>
               <Link href="/search" className="px-3 py-1.5 rounded-md bg-blue-600 text-white hover:bg-blue-500 transition-colors font-medium">
                 🔍 Search
               </Link>
