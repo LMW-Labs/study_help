@@ -3,7 +3,7 @@
 import { useState, useTransition, useCallback, useRef } from "react";
 import Link from "next/link";
 import { searchLocal, LocalResult } from "@/lib/localSearch";
-import type { SearchResponse, CaseLawResult, WebResult } from "@/app/api/search/route";
+import type { CaseLawResult } from "@/app/api/search/route";
 
 const SUGGESTED = [
   "permissive use",
@@ -16,7 +16,7 @@ const SUGGESTED = [
   "workers compensation",
 ];
 
-type Tab = "study" | "caselaw" | "web";
+type Tab = "study" | "caselaw";
 
 function StudyResultCard({ result }: { result: LocalResult }) {
   const [flipped, setFlipped] = useState(false);
@@ -32,7 +32,7 @@ function StudyResultCard({ result }: { result: LocalResult }) {
         <span className="text-xs text-slate-600">{result.sectionTitle}</span>
       </div>
       <p className="text-white font-medium text-sm mb-1">{result.card.term}</p>
-      {flipped && (
+      {flipped ? (
         <div className="mt-3 pt-3 border-t border-slate-800 space-y-2">
           <p className="text-slate-300 text-sm leading-relaxed">{result.card.definition}</p>
           {result.card.example && (
@@ -41,8 +41,7 @@ function StudyResultCard({ result }: { result: LocalResult }) {
             </p>
           )}
         </div>
-      )}
-      {!flipped && (
+      ) : (
         <p className="text-slate-500 text-xs mt-1">tap to reveal definition</p>
       )}
     </div>
@@ -82,59 +81,28 @@ function CaseLawCard({ result }: { result: CaseLawResult }) {
   );
 }
 
-function WebResultCard({ result }: { result: WebResult }) {
-  return (
-    <a
-      href={result.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block bg-slate-900 border border-slate-800 hover:border-emerald-500/40 rounded-xl p-4 transition-all group"
-    >
-      <div className="flex items-start justify-between gap-2 mb-2">
-        <span className="text-xs text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded-full">
-          {result.source}
-        </span>
-        <span className="text-xs text-slate-600 truncate max-w-[120px]">{result.url.slice(0, 40)}…</span>
-      </div>
-      <p className="text-white font-medium text-sm group-hover:text-emerald-300 transition-colors mb-1 leading-snug">
-        {result.title}
-      </p>
-      <p className="text-slate-400 text-xs leading-relaxed line-clamp-3">{result.description}</p>
-      <span className="inline-block mt-2 text-xs text-emerald-400 group-hover:underline">
-        Open →
-      </span>
-    </a>
-  );
-}
-
 export default function SearchPage() {
   const [query, setQuery] = useState("");
   const [activeTab, setActiveTab] = useState<Tab>("study");
   const [localResults, setLocalResults] = useState<LocalResult[]>([]);
-  const [apiResults, setApiResults] = useState<SearchResponse | null>(null);
-  const [hasWebKey, setHasWebKey] = useState<boolean | null>(null);
+  const [caselaw, setCaselaw] = useState<CaseLawResult[]>([]);
   const [isPending, startTransition] = useTransition();
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const runSearch = useCallback((q: string) => {
-    // Local search is instant
     setLocalResults(searchLocal(q));
 
-    // Remote search (debounced)
     if (debounceRef.current) clearTimeout(debounceRef.current);
-    if (!q.trim()) {
-      setApiResults(null);
-      return;
-    }
+    if (!q.trim()) { setCaselaw([]); return; }
+
     debounceRef.current = setTimeout(() => {
       startTransition(async () => {
         try {
-          const res = await fetch(`/api/search?q=${encodeURIComponent(q)}&type=all`);
-          const data: SearchResponse = await res.json();
-          setApiResults(data);
-          setHasWebKey(data.hasWebKey);
+          const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
+          const data = await res.json();
+          setCaselaw(data.caselaw ?? []);
         } catch {
-          // network error — keep showing local results
+          // network error
         }
       });
     }, 500);
@@ -145,26 +113,21 @@ export default function SearchPage() {
     runSearch(val);
   };
 
-  const tabCounts = {
-    study: localResults.length,
-    caselaw: apiResults?.caselaw.length ?? 0,
-    web: apiResults?.web.length ?? 0,
-  };
+  const tabCounts = { study: localResults.length, caselaw: caselaw.length };
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
-      {/* Header */}
       <div className="mb-8">
         <Link href="/" className="text-slate-400 hover:text-white text-sm transition-colors">
           ← Back to Home
         </Link>
         <h1 className="text-2xl font-bold text-white mt-3">Search</h1>
         <p className="text-slate-400 mt-1 text-sm">
-          Search your study cards, US case law (CourtListener), and the web simultaneously.
+          Search your study cards and US insurance case law simultaneously.
         </p>
       </div>
 
-      {/* Search Bar */}
+      {/* Search bar */}
       <div className="relative mb-4">
         <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-lg pointer-events-none">
           🔍
@@ -200,27 +163,11 @@ export default function SearchPage() {
         </div>
       )}
 
-      {/* Web key notice */}
-      {query && hasWebKey === false && (
-        <div className="bg-slate-900 border border-slate-700 rounded-xl p-4 mb-6 flex items-start gap-3">
-          <span className="text-yellow-400 text-lg shrink-0">⚠️</span>
-          <div>
-            <p className="text-sm text-slate-300 font-medium">Web search not configured</p>
-            <p className="text-xs text-slate-500 mt-0.5">
-              Add a <code className="text-blue-400">BRAVE_SEARCH_API_KEY</code> to your Vercel environment variables to enable web search.{" "}
-              <a href="https://brave.com/search/api/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
-                Get a free key →
-              </a>
-            </p>
-          </div>
-        </div>
-      )}
-
-      {/* Result tabs */}
+      {/* Tabs + results */}
       {query && (
         <>
           <div className="flex gap-1 bg-slate-900/50 rounded-xl p-1 mb-6 border border-slate-800">
-            {(["study", "caselaw", "web"] as Tab[]).map((tab) => (
+            {(["study", "caselaw"] as Tab[]).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -230,10 +177,8 @@ export default function SearchPage() {
                     : "text-slate-500 hover:text-slate-300"
                 }`}
               >
-                <span>
-                  {tab === "study" ? "🃏" : tab === "caselaw" ? "⚖️" : "🌐"}
-                </span>
-                <span className="capitalize">{tab === "caselaw" ? "Case Law" : tab}</span>
+                <span>{tab === "study" ? "🃏" : "⚖️"}</span>
+                <span>{tab === "study" ? "Study Cards" : "Case Law"}</span>
                 {tabCounts[tab] > 0 && (
                   <span className={`text-xs px-1.5 py-0.5 rounded-full ${
                     activeTab === tab ? "bg-blue-500 text-white" : "bg-slate-700 text-slate-400"
@@ -245,105 +190,50 @@ export default function SearchPage() {
             ))}
           </div>
 
-          {/* Study Results */}
           {activeTab === "study" && (
-            <div>
-              {localResults.length === 0 ? (
-                <div className="text-center py-16 text-slate-500">
-                  <p className="text-4xl mb-3">🔍</p>
-                  <p>No study cards match &ldquo;{query}&rdquo;</p>
-                </div>
-              ) : (
-                <div className="grid md:grid-cols-2 gap-3">
-                  {localResults.map((r) => (
-                    <StudyResultCard key={r.card.id} result={r} />
-                  ))}
-                </div>
-              )}
-            </div>
+            localResults.length === 0 ? (
+              <div className="text-center py-16 text-slate-500">
+                <p className="text-4xl mb-3">🔍</p>
+                <p>No study cards match &ldquo;{query}&rdquo;</p>
+              </div>
+            ) : (
+              <div className="grid md:grid-cols-2 gap-3">
+                {localResults.map((r) => <StudyResultCard key={r.card.id} result={r} />)}
+              </div>
+            )
           )}
 
-          {/* Case Law Results */}
           {activeTab === "caselaw" && (
-            <div>
-              {isPending && !apiResults ? (
-                <div className="grid md:grid-cols-2 gap-3">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="bg-slate-900 border border-slate-800 rounded-xl p-4 animate-pulse">
-                      <div className="h-3 bg-slate-800 rounded w-24 mb-3" />
-                      <div className="h-4 bg-slate-800 rounded w-3/4 mb-2" />
-                      <div className="h-3 bg-slate-800 rounded w-full mb-1" />
-                      <div className="h-3 bg-slate-800 rounded w-5/6" />
-                    </div>
-                  ))}
-                </div>
-              ) : apiResults && apiResults.caselaw.length > 0 ? (
-                <div>
-                  <p className="text-xs text-slate-500 mb-4">
-                    Results from{" "}
-                    <a href="https://www.courtlistener.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
-                      CourtListener
-                    </a>{" "}
-                    — free, open US case law database
-                  </p>
-                  <div className="grid md:grid-cols-2 gap-3">
-                    {apiResults.caselaw.map((r, i) => (
-                      <CaseLawCard key={i} result={r} />
-                    ))}
+            isPending && caselaw.length === 0 ? (
+              <div className="grid md:grid-cols-2 gap-3">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="bg-slate-900 border border-slate-800 rounded-xl p-4 animate-pulse">
+                    <div className="h-3 bg-slate-800 rounded w-24 mb-3" />
+                    <div className="h-4 bg-slate-800 rounded w-3/4 mb-2" />
+                    <div className="h-3 bg-slate-800 rounded w-full mb-1" />
+                    <div className="h-3 bg-slate-800 rounded w-5/6" />
                   </div>
-                </div>
-              ) : (
-                <div className="text-center py-16 text-slate-500">
-                  <p className="text-4xl mb-3">⚖️</p>
-                  <p>No case law found for &ldquo;{query}&rdquo;</p>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Web Results */}
-          {activeTab === "web" && (
-            <div>
-              {!hasWebKey ? (
-                <div className="text-center py-16 text-slate-500">
-                  <p className="text-4xl mb-3">🌐</p>
-                  <p className="mb-2">Web search requires a Brave Search API key</p>
-                  <a
-                    href="https://brave.com/search/api/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-400 hover:underline text-sm"
-                  >
-                    Get a free key at brave.com/search/api →
-                  </a>
-                  <p className="text-xs text-slate-600 mt-3">
-                    Then add <code className="text-blue-400">BRAVE_SEARCH_API_KEY</code> in your Vercel project settings under Environment Variables.
-                  </p>
-                </div>
-              ) : isPending && !apiResults ? (
+                ))}
+              </div>
+            ) : caselaw.length > 0 ? (
+              <div>
+                <p className="text-xs text-slate-500 mb-4">
+                  Results from{" "}
+                  <a href="https://www.courtlistener.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
+                    CourtListener
+                  </a>{" "}
+                  — free, open US case law database
+                </p>
                 <div className="grid md:grid-cols-2 gap-3">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="bg-slate-900 border border-slate-800 rounded-xl p-4 animate-pulse">
-                      <div className="h-3 bg-slate-800 rounded w-24 mb-3" />
-                      <div className="h-4 bg-slate-800 rounded w-3/4 mb-2" />
-                      <div className="h-3 bg-slate-800 rounded w-full mb-1" />
-                      <div className="h-3 bg-slate-800 rounded w-5/6" />
-                    </div>
-                  ))}
+                  {caselaw.map((r, i) => <CaseLawCard key={i} result={r} />)}
                 </div>
-              ) : apiResults && apiResults.web.length > 0 ? (
-                <div className="grid md:grid-cols-2 gap-3">
-                  {apiResults.web.map((r, i) => (
-                    <WebResultCard key={i} result={r} />
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-16 text-slate-500">
-                  <p className="text-4xl mb-3">🌐</p>
-                  <p>No web results for &ldquo;{query}&rdquo;</p>
-                </div>
-              )}
-            </div>
+              </div>
+            ) : (
+              <div className="text-center py-16 text-slate-500">
+                <p className="text-4xl mb-3">⚖️</p>
+                <p>No case law found for &ldquo;{query}&rdquo;</p>
+              </div>
+            )
           )}
         </>
       )}
