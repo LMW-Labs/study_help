@@ -1,5 +1,5 @@
-// Source: Pass-and-Turn Reading Assignment.pdf (AT-Investigation Course)
-// Extracted manually from 43-page case study document.
+// Sources: Pass-and-Turn Reading Assignment.pdf (AT-Investigation Course);
+// Customer Service manual + Final Exam Review (Adobe Scan, Oct 2026) and Final Exam Study Guide.docx.
 
 export interface DiscussionQuestion {
   question: string;
@@ -234,6 +234,371 @@ export const caseStudies: CaseStudy[] = [
         "Negligence (Duty / Breach / Damage)",
         "Witness credibility",
         "Investigation timeline urgency",
+      ],
+    },
+  },
+
+  // ── Source: Farm Bureau Customer Service manual + Final Exam Review (scanned) ──
+  {
+    id: "two-letters",
+    title: "Two Letters to the Manager — Same Claim Outcome, Opposite Reputations",
+    source: "Customer Service Manual — Opening Exercise (Adjuster Training)",
+    category: "Customer Service",
+    difficulty: "foundational",
+    scenario:
+      "Your manager has just received two letters after a recent storm. The first concerns a claim you handled; the second concerns a co-worker's claim. In the first, the insured praises the adjuster: even though the coverage paid less than the insured would have liked, the adjuster met at the insured's convenience while they were staying with family, inspected thoroughly (including checking undamaged parts of the property), explained the factors that limited the coverage, and made the insured feel at ease. In the second, the insured got a same-day-plus-one inspection, a correct estimate, timely payment, and a completed repair — but the adjuster was rude, ignored questions, answered with 'yeah whatever,' and asked a neighbor what 'her interest' in the matter was. The insured never wants that adjuster back.",
+    facts: [
+      "Both claims arose from the same recent storm",
+      "Letter 1: the insured was paid LESS than they hoped, yet was satisfied and reassured they had 'the best insurance company'",
+      "Letter 1: the adjuster met at the insured's convenience while the insured was displaced and staying with local family",
+      "Letter 1: the adjuster inspected the damaged property AND checked that the rest of the property wasn't damaged",
+      "Letter 1: the adjuster explained the factors that limited the amount of coverage",
+      "Letter 2: inspection within a day of the first call; the estimate was correct; payment and repairs were completed promptly",
+      "Letter 2: the adjuster ignored the insured or answered 'yeah whatever'",
+      "Letter 2: the adjuster was rude to a neighbor, demanding to know 'her interest' in the matter",
+      "Letter 2: the insured says the turnaround and payment were satisfactory — it was the attitude that made them angry",
+    ],
+    discussionQuestions: [
+      {
+        question: "The second insured got a fast inspection, a correct estimate, and prompt payment. Why are they still unhappy enough to write to the manager?",
+        hint: "Do customers judge us by our intentions or our actions?",
+        modelAnswer:
+          "Because customers judge us by our actions, not our good intentions — and service is more than technical accuracy. The adjuster did the technical job correctly but was dismissive, ignored questions, and was rude to a neighbor. Communication is 7% words, 38% tone, and 55% body language, so 'yeah whatever' and an indifferent demeanor outweighed the correct check. Excellence takes commitment beyond being technically right: it means making the claim experience less stressful and showing the insured we care.",
+      },
+      {
+        question: "The first insured received less money than they wanted but praised the adjuster. Which specific behaviors created that result?",
+        modelAnswer:
+          "(1) Flexibility — meeting at the insured's convenience while they were displaced, working in the manner most comfortable for the customer. (2) Thoroughness — inspecting the rest of the property to make sure nothing was missed, which showed the adjuster had the insured's interest in mind. (3) Explanation — explaining the factors behind the coverage amount, because insureds depend on us to explain what we need and how the process works. (4) Empathy — making the insured feel at ease and that the adjuster had their best interest in mind. Professionalism and sincerity made a limited payment feel fair.",
+      },
+      {
+        question: "Using the five people skills from Chapter 7, identify which ones the second adjuster failed to demonstrate.",
+        modelAnswer:
+          "Empathy: showed no identification with an insured in the middle of a horrible storm. Self-Preparation & Focus: was not mentally prepared to give the insured's problem full attention. Understand the Person: made no effort to learn about the insured or the neighbor. Build Rapport: tone and non-verbal messages ('yeah whatever') showed indifference instead of trust. Be Attentive: did not listen to the words or the meaning behind them, and ignored questions. The adjuster essentially failed all five.",
+      },
+      {
+        question: "What business consequences could the second letter represent for the company, even though the claim was paid correctly?",
+        modelAnswer:
+          "Customers leave because of poor service far more than price — 68% vs. 9% (7 to 1). This insured may not renew, will likely tell friends and relatives, and the agent loses the ability to point with pride at the claim department. Acquiring new customers costs much more than keeping existing ones. Happy customers refer business, stay long-term, and reduce operating costs; unhappy ones do the opposite.",
+      },
+    ],
+    analysis: {
+      keyIssues: [
+        "Technical accuracy alone doesn't equal good claim service",
+        "Customers judge us by our actions, not our good intentions",
+        "Tone and body language (93% of communication) can undo correct work",
+        "A clear explanation of coverage limits can preserve satisfaction even when the payment disappoints",
+        "Every person at the loss (including neighbors) forms an impression of the company",
+      ],
+      whyItMatters:
+        "The claim is the moment the insured finds out what they actually bought. Two adjusters can produce identical numbers and opposite reputations. Since service — not price — drives retention by a 7 to 1 margin, the adjuster's conduct directly affects the company's growth.",
+      howToApproach: [
+        "Prepare and focus before every contact — leave the last claim behind",
+        "Be flexible about meeting times and places, especially for displaced insureds",
+        "Inspect thoroughly and let the insured see you looking out for their interest",
+        "Explain coverage decisions and limits clearly and patiently",
+        "Treat bystanders and neighbors courteously — they are potential customers and witnesses",
+        "Follow up after payment to complete the job",
+      ],
+      commonMistakes: [
+        "Assuming a fast, correct payment guarantees satisfaction",
+        "Answering questions curtly or not at all",
+        "Treating customers as an interruption of your work",
+        "Letting a bad day show — failing to Sustain The Pace",
+      ],
+      conceptConnections: [
+        "Goal for Claim Service",
+        "Customers judge by actions",
+        "7% / 38% / 55% communication",
+        "Five people skills",
+        "Conning survey (68% vs. 9%)",
+        "Empathy",
+      ],
+    },
+  },
+  {
+    id: "quiet-customer",
+    title: "The Quiet Customer — When Silence Isn't Satisfaction",
+    source: "Customer Service Manual — Chapter 8, Customer Behavior (Adjuster Training)",
+    category: "Customer Service",
+    difficulty: "foundational",
+    scenario:
+      "Jenny's supervisor asks why activity has dropped off on the Hodges claim. Jenny isn't sure why Mr. Hodges stopped calling. She says: 'I thought Mr. Hodges was very pleased with our service. He never complained. Even when we had computer problems and his medical payments were incorrect, he didn't say a word about it.'",
+    facts: [
+      "Mr. Hodges is a passive customer — he does not complain or demand service",
+      "His medical payments were incorrect during a period of computer problems",
+      "He never mentioned the payment error",
+      "He has stopped calling, and claim activity has dropped off",
+      "Jenny assumed that no complaints meant satisfaction",
+    ],
+    discussionQuestions: [
+      {
+        question: "What mistake did Jenny make with Mr. Hodges?",
+        hint: "What do dissatisfied passive customers usually do?",
+        modelAnswer:
+          "She took a passive customer for granted. Passive customers usually don't demand service or express anger — so when they're dissatisfied they may simply quit calling. Jenny read his silence as satisfaction, even after a known error on his medical payments.",
+      },
+      {
+        question: "What could Jenny have said to Mr. Hodges, both after the payment error and in routine contact?",
+        modelAnswer:
+          "After the error: 'Mr. Hodges, I know your medical payments were incorrect last month, but we have that fixed now. Have there been any other problems?' In routine contact, a little prompting: 'Mr. Hodges, according to my records your checks have been on time. Have there been any problems?' Acknowledge the problem, confirm it's fixed, and invite feedback.",
+      },
+      {
+        question: "Passive customers are often relationship-oriented. How should that change how Jenny handles the business call?",
+        modelAnswer:
+          "She should take part in some social conversation during the call to build a stronger relationship, rather than staying strictly to business (which works better for assertive or talkative customers). She should also periodically ask about her level of service — the tip the manual gives as usually successful with passive customers.",
+      },
+      {
+        question: "Compare how you'd handle Mr. Hodges with how you'd handle a talkative customer and an assertive customer.",
+        modelAnswer:
+          "Passive: build the relationship, take part in social conversation, prompt for problems, and check on service levels. Talkative: ask closed questions, use space control, give minimal responses, and steer back to business. Assertive/Demanding: keep the social talk minimal, stay objective, listen, apologize generally, propose a direct action plan, and raise your assertiveness to just below theirs. The skill is recognizing the pattern and adjusting your response.",
+      },
+    ],
+    analysis: {
+      keyIssues: [
+        "Silence ≠ satisfaction with passive customers",
+        "Known service failures must be acknowledged proactively",
+        "Different behavior patterns call for different techniques",
+      ],
+      whyItMatters:
+        "Passive customers are the easiest to serve and the easiest to lose without noticing. They don't escalate — they just leave. Catching an error and owning it before they quietly walk away protects both the claim and the policyholder relationship.",
+      howToApproach: [
+        "Recognize the passive pattern early",
+        "Proactively acknowledge any errors and confirm they're fixed",
+        "Prompt with specific questions ('Have there been any problems?')",
+        "Engage in some social conversation to build the relationship",
+        "Periodically ask the customer about your level of service",
+      ],
+      commonMistakes: [
+        "Assuming no complaints means no problems",
+        "Fixing an error silently without telling the customer",
+        "Treating a passive customer like a talkative one (cutting off relationship-building)",
+      ],
+      conceptConnections: [
+        "Five customer behavior patterns",
+        "Passive customer",
+        "Talkative customer",
+        "Assertive/demanding customer",
+        "Rapport",
+        "Follow-up",
+      ],
+    },
+  },
+  {
+    id: "borrowed-car-umpd",
+    title: "Borrowed Car, Uninsured Driver — Sorting Out Primary, Excess, and UMPD",
+    source: "Final Exam Review & Study Guide — PAP Application Scenario (Adjuster Training)",
+    category: "Coverage",
+    difficulty: "intermediate",
+    scenario:
+      "Your insured, James, borrows his friend Kevin's car with permission (it isn't furnished for James' regular use). While James is stopped at a light, an uninsured motorist rear-ends him. Kevin's car needs $3,000 in repairs and is towed and stored. James' golf clubs in the trunk are destroyed. Two weeks later, in a separate incident, James hits a deer in Kevin's car, causing another $3,000 in damage. Kevin's policy has a $1,000 other than collision deductible; James' own policy has a $500 OTC deductible. Both policies carry UMPD.",
+    facts: [
+      "James is driving Kevin's car with permission; not furnished for James' regular use",
+      "Incident 1: rear-ended by an at-fault uninsured motorist — $3,000 in damage, plus towing and storage",
+      "Incident 1: James' golf clubs in the trunk were destroyed",
+      "Incident 2: deer strike — $3,000 in damage",
+      "Kevin's OTC deductible: $1,000; James' OTC deductible: $500",
+      "Coverage on the vehicle is primary; the driver's coverage is excess",
+    ],
+    discussionQuestions: [
+      {
+        question: "For the deer strike, which policy pays first, and how much does each company pay?",
+        hint: "Primary follows the car. Excess pays up to what it would have paid as primary.",
+        modelAnswer:
+          "Kevin's policy (on the vehicle) is primary: $3,000 − $1,000 deductible = $2,000. James' policy is excess and pays up to what it would have paid as primary ($3,000 − $500 = $2,500), so it pays $500. Total paid: $2,500. The parties can't choose which policy applies.",
+      },
+      {
+        question: "For the uninsured motorist collision, what coverage applies to the car repairs and the towing and storage?",
+        modelAnswer:
+          "Because an at-fault uninsured motorist caused the damage, UMPD may pay for the vehicle damage, and towing and storage can follow under UMPD as well. Towing and storage follow the coverage paying for the damage. Collision is an alternative if UMPD isn't available or the insured prefers it. Note that UMPD often carries its own (usually small) deductible depending on the state and policy form, so check the declarations.",
+      },
+      {
+        question: "Are James' destroyed golf clubs covered, and under what?",
+        modelAnswer:
+          "UMPD may apply — the study guide notes that UMPD isn't limited to the damaged vehicle and can reach other property damaged by an at-fault uninsured motorist, such as golf clubs in the trunk. The clubs are also personal property that could be covered under James' homeowners Coverage C. Review the policy language for which applies first, and avoid duplicate payment.",
+      },
+      {
+        question: "If the uninsured driver had been driving a government-owned vehicle, would UM apply?",
+        modelAnswer:
+          "No. The PAP Part C lists vehicles that are not 'uninsured motor vehicles' (items 1–6), and a government-owned vehicle is among them. The claim would go against the governmental entity, subject to its own rules and notice requirements, or under collision coverage.",
+      },
+    ],
+    analysis: {
+      keyIssues: [
+        "Primary (vehicle) vs. excess (driver) coverage on borrowed cars",
+        "Calculating the excess carrier's share when deductibles differ",
+        "Coverage follows the proximate cause — towing follows the damage coverage",
+        "UMPD can extend beyond the car to other property",
+        "Government vehicles aren't 'uninsured motor vehicles'",
+      ],
+      whyItMatters:
+        "Multi-policy scenarios are where adjusters most often overpay, underpay, or pay from the wrong coverage. Getting primary/excess order and deductibles right protects both the insured and the company.",
+      howToApproach: [
+        "Confirm permissive use and that the vehicle isn't furnished for regular use",
+        "Identify the primary policy (the vehicle's) and the excess policy (the driver's)",
+        "Identify the proximate cause to select the right coverage part",
+        "Calculate the primary payment, then the excess payment up to its own 'as-if-primary' amount",
+        "Check UM definitions and exclusions before applying UMPD",
+        "Coordinate with HO Coverage C for personal property; avoid duplicate payment",
+      ],
+      commonMistakes: [
+        "Letting the insured choose which policy pays",
+        "Having the excess carrier pay its full deductible-adjusted amount on top of the primary",
+        "Putting towing under the wrong coverage",
+        "Treating a government vehicle as an uninsured motor vehicle",
+      ],
+      conceptConnections: [
+        "Primary vs. excess",
+        "Other than collision",
+        "UMPD",
+        "Proximate cause",
+        "Towing and storage",
+        "Homeowners Coverage C",
+      ],
+    },
+  },
+  {
+    id: "um-release-subrogation",
+    title: "The UMBI Release — Spouses, Med Pay Credits, and Subrogation Rights",
+    source: "Final Exam Review — UM Coverage Questions (Adjuster Training)",
+    category: "Bodily Injury",
+    difficulty: "advanced",
+    scenario:
+      "Your insured was injured when an at-fault uninsured motorist ran a red light. You've already paid $5,000 under the insured's Part B Medical Payments coverage. The insured now presents a UMBI claim and is demanding punitive damages, arguing the uninsured driver was reckless. The insured is married; the spouse was not in the car. While you're preparing the UMBI release, you learn the insured is considering signing a separate release in favor of the at-fault driver — who has offered a small personal cash payment — without telling you.",
+    facts: [
+      "The at-fault driver is uninsured",
+      "$5,000 has already been paid under Part B Medical Payments",
+      "The insured is making a UMBI claim under Part C",
+      "The insured is demanding punitive damages",
+      "The insured's spouse was not injured",
+      "The insured may sign a release with the at-fault driver without notifying the insurer",
+    ],
+    discussionQuestions: [
+      {
+        question: "Is the insurer entitled to a credit for the $5,000 med pay when paying the UMBI claim?",
+        hint: "See PAP Part C, Limit of Liability, B.1.",
+        modelAnswer:
+          "Yes. The PAP's UM Limit of Liability provision says no one is entitled to duplicate payments for the same elements of loss under Part C and Part A or Part B. The medical expenses already paid under med pay can't be paid again under UMBI, so the insurer gets a credit.",
+      },
+      {
+        question: "Can the insured recover punitive damages under UM coverage in the ISO PAP?",
+        hint: "See PAP Part C, Exclusions D.",
+        modelAnswer:
+          "No. The ISO PAP Part C excludes punitive or exemplary damages from UM coverage. UM pays compensatory damages the insured is legally entitled to recover from the uninsured driver — not damages meant to punish that driver.",
+      },
+      {
+        question: "Why should you get the non-injured spouse's signature on the release?",
+        modelAnswer:
+          "The non-injured spouse may have their own claim — typically loss of consortium (loss of companionship and services). If the spouse doesn't sign, that potential claim stays open and the company hasn't fully closed its exposure. Getting both spouses on the release (a general release or the UMBI release) resolves all claims arising from the injury.",
+      },
+      {
+        question: "If the insured signs a release in favor of the at-fault driver without notice, what happens to subrogation — and has the insured violated the UMBI release?",
+        modelAnswer:
+          "Once the company pays UM benefits, it's entitled to pursue the responsible party (subrogation). If the insured independently releases the at-fault driver, those recovery rights are destroyed. That impairs the company's rights under the policy's 'Our Right to Recover Payment' condition and likely violates the UMBI release, which typically assigns or preserves the company's rights. Once the insured has been paid under a UMBI release, they generally have no further right to sign a separate release with the responsible party without the insurer's consent. Explain this to the insured before payment.",
+      },
+    ],
+    analysis: {
+      keyIssues: [
+        "No duplicate payments between Part B and Part C",
+        "UM excludes punitive damages under the ISO PAP",
+        "Spousal loss of consortium claims must be closed out",
+        "Protecting subrogation rights against the responsible party",
+      ],
+      whyItMatters:
+        "UM claims put the company in the shoes of the uninsured tortfeasor while it's still the insured's own carrier. Releases, credits, and subrogation have to be handled precisely or the company pays twice, leaves claims open, or loses recovery rights.",
+      howToApproach: [
+        "Review payments already made under Parts A, B, and D before evaluating UM",
+        "Apply the Limit of Liability non-duplication provision",
+        "Identify all potential claimants, including the non-injured spouse",
+        "Have all appropriate parties sign the release",
+        "Explain subrogation to the insured and warn them not to release the responsible party",
+        "Pursue subrogation after payment",
+      ],
+      commonMistakes: [
+        "Paying medical expenses twice under med pay and UMBI",
+        "Including punitive damages in a UM evaluation",
+        "Leaving the spouse off the release",
+        "Failing to warn the insured about side settlements with the tortfeasor",
+      ],
+      conceptConnections: [
+        "Uninsured Motorists (Part C)",
+        "Medical Payments (Part B)",
+        "Releases",
+        "Loss of consortium",
+        "Subrogation",
+        "PAP exclusions",
+      ],
+    },
+  },
+  {
+    id: "tree-on-roof",
+    title: "Tree on the Roof — Coverage A, Debris Removal, and Worst-Case Exposure",
+    source: "Final Exam Review — ISO HO 3 Scenario (Adjuster Training)",
+    category: "Property Loss",
+    difficulty: "intermediate",
+    scenario:
+      "During a windstorm, a large tree on the insured's property falls onto the roof of the dwelling, puncturing it and letting rain into the living room, where the sofa and rug are soaked. A second tree from the same storm falls across the driveway, blocking it, without hitting any structure. The insured asks: 'Will you pay to fix the roof, get both trees removed, and replace my furniture?' The home is insured on an ISO HO 3 at a Coverage A limit close to its full replacement cost.",
+    facts: [
+      "Cause of loss: windstorm",
+      "Tree #1: fell on the dwelling (a covered structure) and punctured the roof",
+      "Rain entered through the storm-created opening and soaked contents",
+      "Tree #2: blocked the driveway but damaged no structure",
+      "Policy: ISO HO 3; Coverage A is close to replacement cost",
+    ],
+    discussionQuestions: [
+      {
+        question: "Under which coverage are the roof repairs paid, and how are they settled?",
+        modelAnswer:
+          "Coverage A – Dwelling, which the HO 3 covers on an open-peril basis. Windstorm isn't excluded. Under Section I Conditions, Loss Settlement, the dwelling is settled at replacement cost (subject to the insurance-to-value requirement). If the insured is insured to at least 80% of replacement cost, they get replacement cost without deduction for depreciation; otherwise the settlement formula applies.",
+      },
+      {
+        question: "Are the soaked sofa and rug covered?",
+        hint: "Coverage C is named peril. How did the rain get in?",
+        modelAnswer:
+          "Coverage C is named peril, and Windstorm or Hail is a named peril. Rain damage to contents inside a building is generally covered only if the wind first creates an opening in the roof or wall through which the rain enters, which is exactly what happened here. The contents are settled at ACV (replacement cost minus depreciation) unless an RC endorsement applies.",
+      },
+      {
+        question: "What does the policy pay to remove the trees? Are we limited to the Debris Removal additional coverage?",
+        hint: "Read Section I – Additional Coverages, 1. Debris Removal, on page 5 of the policy.",
+        modelAnswer:
+          "Debris Removal covers reasonable expense to remove debris of covered property, and the HO 3 also covers removal of the insured's trees felled by Windstorm or Hail when they damage a covered structure OR block a driveway (or a ramp for a handicapped person). In the ISO form, tree removal is limited to $1,000 per loss, with no more than $500 for any one tree. Here, both trees qualify — the one on the roof because it damaged a covered structure, and the one across the driveway because it blocks it. Confirm the exact amounts against your course's policy edition.",
+      },
+      {
+        question: "What is the insurer's maximum possible exposure in a worst-case version of this loss?",
+        modelAnswer:
+          "If the dwelling were destroyed, the exposure could reach: the full Coverage A limit; plus Debris Removal, which the HO 3 provides as an additional 5% of the limit when the damage plus debris removal exceeds the limit; plus tree removal (up to $1,000); plus Coverage B, Coverage C, and Coverage D – Loss of Use (ALE); plus other additional coverages such as Reasonable Repairs. Many additional coverages are 'additional insurance' on top of the limits, so the worst case is meaningfully more than the Coverage A limit alone.",
+      },
+    ],
+    analysis: {
+      keyIssues: [
+        "Open peril (A & B) vs. named peril (C)",
+        "The 'opening first' requirement for rain damage to contents",
+        "Debris removal and tree-removal limits as additional coverage",
+        "RC on the dwelling vs. ACV on contents",
+        "Total exposure includes additional coverages above the limits",
+      ],
+      whyItMatters:
+        "Tree claims are some of the most common homeowners losses, and insureds almost always ask about tree removal. Knowing exactly where those dollars come from — and their limits — prevents both overpayment and an unhappy insured.",
+      howToApproach: [
+        "Confirm the cause of loss (windstorm) and check exclusions",
+        "Separate the loss into dwelling (A), contents (C), debris and trees, and ALE (D)",
+        "Verify how rain entered before paying for interior or contents damage",
+        "Apply the tree-removal rules for each tree individually",
+        "Apply the Loss Settlement provisions: RC for A, ACV for C",
+        "Remind the insured of their duty to make reasonable repairs (tarp the roof) to prevent further damage",
+      ],
+      commonMistakes: [
+        "Paying tree removal for a tree that neither damaged a structure nor blocked a driveway or ramp",
+        "Paying rain damage to contents without confirming a wind-created opening",
+        "Depreciating dwelling repairs that qualify for replacement cost",
+        "Forgetting additional coverages when estimating exposure",
+      ],
+      conceptConnections: [
+        "ISO HO 3 Coverage A",
+        "Coverage C named perils",
+        "Debris Removal",
+        "Reasonable Repairs",
+        "Loss Settlement (RC vs. ACV)",
+        "Coinsurance / insurance-to-value",
       ],
     },
   },

@@ -17,7 +17,7 @@ export default function Home() {
         </h1>
         <p className="text-slate-400 text-lg max-w-2xl mx-auto">
           Your interactive study tool for Insurance Claims Investigation. Master
-          the material through flashcards, then test yourself with two full quizzes.
+          the material through flashcards, then test yourself with full-length quizzes.
         </p>
       </div>
 

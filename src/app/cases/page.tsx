@@ -16,6 +16,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   "Bodily Injury": "text-rose-400 bg-rose-400/10 border-rose-400/20",
   Theft: "text-yellow-400 bg-yellow-400/10 border-yellow-400/20",
   "Total Loss": "text-cyan-400 bg-cyan-400/10 border-cyan-400/20",
+  "Customer Service": "text-pink-400 bg-pink-400/10 border-pink-400/20",
 };
 
 const DIFFICULTY_BADGE: Record<string, string> = {
